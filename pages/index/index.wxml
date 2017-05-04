@@ -1,0 +1,40 @@
+<view class="root">
+    <view class="line">
+        <text>智能聊天室</text>
+        <view bindtap="openChat" class="demo">
+            小安安客服
+            <view class="link">进入</view>
+        </view>
+    </view>
+    <view class="line">
+        <text>位置服务</text>
+        <input type="text" value="{{loginUrl}}" disabled class="hide"></input>
+        <view class="line-control">
+            <view bindtap="doLogin" class="item"><view class="item-inner">使用位置服务</view></view>
+            <view bindtap="clearSession" class="item"><view class="item-inner">清除位置信息</view></view>
+        </view>
+    </view>
+    <view class="line">
+        <text>报平安</text>
+        <input type="text" value="{{requestUrl}}" disabled class="hide"></input>
+        <view class="line-control">
+            <view bindtap="doRequest" class="item" ><view class="item-inner">向关心我的人们报平安</view></view>
+        </view>
+    </view>
+    <view class="line">
+        <text>关爱服务</text>
+        <input type="text" value="{{tunnelUrl}}" disabled class="hide" />
+        <view class="line-control">
+            <view class="item flag">
+                <view class="item-inner">开启/关闭
+                    <view class="switch-status">
+                        <text>{{tunnelStatusText[tunnelStatus]}}</text>
+                        <switch bindchange="switchTunnel" class="switch" checked="{{tunnelStatus == 'connected'}}"/>
+                    </view>
+                </view>
+            </view>
+            <view bindtap="sendMessage" class="item {{tunnelStatus == 'connected' || 'disabled'}}"><view class="item-inner">一元购</view></view>
+            <view bindtap="testReconnect" class="item {{tunnelStatus == 'connected' || 'disabled'}}"><view class="item-inner">关于我们</view></view>
+        </view>
+    </view>
+</view>
