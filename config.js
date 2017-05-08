@@ -12,6 +12,8 @@ var config = {
         host,
 
         // 登录地址，用于建立会话
+//        loginUrl: `https://${host}/data/release/node-weapp-demo/routes/login`,
+
         loginUrl: `https://${host}/login`,
 
         // 测试的请求地址，用于测试会话

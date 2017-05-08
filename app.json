@@ -1,7 +1,10 @@
 {
     "pages": [
         "pages/index/index",
-        "pages/chat/chat"
+        "pages/chat/chat",
+        "pages/aboutus/aboutus",
+        "pages/map/map",
+        "pages/yyg/yyg"
     ],
     "window": {
         "backgroundTextStyle": "light",

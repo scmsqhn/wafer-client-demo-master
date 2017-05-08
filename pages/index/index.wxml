@@ -10,7 +10,7 @@
         <text>位置服务</text>
         <input type="text" value="{{loginUrl}}" disabled class="hide"></input>
         <view class="line-control">
-            <view bindtap="doLogin" class="item"><view class="item-inner">使用位置服务</view></view>
+            <view bindtap="openMap" class="item"><view class="item-inner">使用位置服务</view></view>
             <view bindtap="clearSession" class="item"><view class="item-inner">清除位置信息</view></view>
         </view>
     </view>
@@ -33,8 +33,8 @@
                     </view>
                 </view>
             </view>
-            <view bindtap="sendMessage" class="item {{tunnelStatus == 'connected' || 'disabled'}}"><view class="item-inner">一元购</view></view>
-            <view bindtap="testReconnect" class="item {{tunnelStatus == 'connected' || 'disabled'}}"><view class="item-inner">关于我们</view></view>
+            <view bindtap="openYYG" class="item {{tunnelStatus == 'connected' || 'disabled'}}"><view class="item-inner">一元购</view></view>
+            <view bindtap="openAboutUs" class="item {{tunnelStatus == 'connected' || 'disabled'}}"><view class="item-inner">关于我们</view></view>
         </view>
     </view>
 </view>

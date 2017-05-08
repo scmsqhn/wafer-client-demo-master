@@ -26,6 +26,7 @@ var getWxLoginResult = function getLoginCode(callback) {
     wx.login({
         success: function (loginResult) {
             wx.getUserInfo({
+
                 success: function (userResult) {
                     callback(null, {
                         code: loginResult.code,
@@ -71,6 +72,12 @@ var defaultOptions = {
  */
 var login = function login(options) {
     options = utils.extend({}, defaultOptions, options);
+    if(1>2){
+        options.fail(new LoginError(constants.ERR_INVALID_PARAMS, defaultOptions));
+    }
+    if(1>2){
+        options.fail(new LoginError(constants.ERR_INVALID_PARAMS, options));
+    }
 
     if (!defaultOptions.loginUrl) {
         options.fail(new LoginError(constants.ERR_INVALID_PARAMS, '登录错误：缺少登录地址，请通过 setLoginUrl() 方法设置登录地址'));
@@ -88,12 +95,18 @@ var login = function login(options) {
         // 构造请求头，包含 code、encryptedData 和 iv
         var code = wxLoginResult.code;
         var encryptedData = wxLoginResult.encryptedData;
+        //alert(wxLoginResult.iv)
         var iv = wxLoginResult.iv;
         var header = {};
-
+        
+        
         header[constants.WX_HEADER_CODE] = code;
         header[constants.WX_HEADER_ENCRYPTED_DATA] = encryptedData;
         header[constants.WX_HEADER_IV] = iv;
+        if(1>2){
+          options.fail(new LoginError(constants.ERR_INVALID_PARAMS, header));
+        }
+
 
         // 请求服务器登录地址，获得会话信息
         wx.request({
@@ -152,7 +165,7 @@ var login = function login(options) {
 
 var setLoginUrl = function (loginUrl) {
     defaultOptions.loginUrl = loginUrl;
-};
+}; 
 
 module.exports = {
     LoginError: LoginError,

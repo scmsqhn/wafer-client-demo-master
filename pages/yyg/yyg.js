@@ -1,29 +1,13 @@
-//index.js
-//获取应用实例
 var app = getApp()
-
-// 显示打印提示
-var showLog = text => wx.showToast({
-		title: text,
-		icon: 'DEBUG'
-	});
-
-Page({
-	  data: {
+Page( {
+  data: {
     imgUrls: [
-      'http://pic2.qjimage.com/bldrm002/high/blm016536.jpg',
-      'http://pic1.qjimage.com/culturarm001/high/45hau0010rm.jpg',
-      'http://pic3.qjimage.com/ph063/high/526-p01893.jpg',
-      'http://pic1.qjimage.com/mf057/high/mf700-03406524.jpg',
-      'http://mpic.tiankong.com/7ea/b85/7eab850bb2bcfcd05b59d3f18e953ee0/640.jpg@360h',
-      'http://mpic.tiankong.com/ab4/36a/ab436a97e0ed267d12ff7c2a31d80f74/466-0506.jpg@360h',
-	  
-      /*'https://onegoods.nosdn.127.net/resupload/2016/9/18/4082e075e9ff72110bb1d73750be065b.jpg',
+      'https://onegoods.nosdn.127.net/resupload/2016/9/18/4082e075e9ff72110bb1d73750be065b.jpg',
       'https://onegoods.nosdn.127.net/resupload/2016/9/20/01d732b0c46a38fc07bbc887dfe23af9.jpg',
       'https://onegoods.nosdn.127.net/resupload/2016/9/19/777e4b1711fb1b0283726cb0b197e8ba.jpg',
       'https://onegoods.nosdn.127.net/resupload/2016/9/20/f2f210633ca371ea6dc56a4b8916a15d.jpg',
       'https://onegoods.nosdn.127.net/resupload/2016/9/21/33c38d5283a862b2523fe2e085355cb2.jpg',
-      'https://res.126.net/p/dbqb/resupload/onlinepath/2016/7/28/0/69e1275c4460f97f2d4b26d716348892.jpg'*/
+      'https://res.126.net/p/dbqb/resupload/onlinepath/2016/7/28/0/69e1275c4460f97f2d4b26d716348892.jpg'
     ],
     indicatorDots: true,
     autoplay: true,
@@ -195,89 +179,65 @@ Page({
       "totalChances": 8090
     }
     ],
-    animationNotice: {},
-    motto: 'Hello World',
-    userInfo: {}
+    animationNotice: {}
   },
-  onLoad: function () {
-    showLog('gonLoad succ')
-    console.log('onLoad')    
+  onReady: function() {
+
   },
-  //
-  payoff: function(e){
-    var that = this;
-    wx.login({
-      success: function(res) {
-        showLog('payoff succ')
-        that.getOpenId(res.code);
+  onLoad: function() {
+    var me = this;
+    var animation = wx.createAnimation( {
+      duration: 400,
+      timingFunction: 'ease-out',
+    });
+    me.animation = animation;
+    wx.getSystemInfo( {
+      success: function( res ) {
+        me.setData( { windowWidth: res.windowWidth })
       }
     });
-    
-  },
-  //获取openid
-  getOpenId: function(code){
-    var that = this;
-    wx.request({ 
-//        url: 'https://70139330.qcloud.la/weixinpay/GetOpenId', 
-        url: 'https://70139330.qcloud.la/', 
-        method: 'POST',
-        header: {
-           'content-type': 'application/x-www-form-urlencoded'
-        },
-        data: {'code':code},
-        success: function(res) {
-		   showLog('get id succ')
-           var openId = res.data.openid;
-           that.xiadan(openId);
-        }
-    })
-  },
-  //下单
-  xiadan: function(openId){
-    var that = this;
-    wx.request({
-        url: 'https://70139330.qcloud.la/weixinpay/xiadan', 
-        method: 'POST',
-        header: {
-           'content-type': 'application/x-www-form-urlencoded'
-        },
-        data: {'openid':openId},
-        success: function(res) {
-           showLog('xiadan succ')
-           var prepay_id = res.data.prepay_id;
-           console.log("统一下单返回 prepay_id:"+prepay_id);
-           that.sign(prepay_id);
-        }
-    })
-  },
-  //签名
-  sign: function(prepay_id){
-    var that = this;
-    wx.request({
-        url: 'https://70139330.qcloud.la/weixinpay/sign', 
-        method: 'POST',
-        header: {
-           'content-type': 'application/x-www-form-urlencoded'
-        },
-        data: {'repay_id':prepay_id},
-        success: function(res) {
-           that.requestPayment(res.data);
 
-        }
-    })
+    console.log( 'onLoad' );
   },
-  //申请支付
-  requestPayment: function(obj){
-    wx.requestPayment({
-      'timeStamp': obj.timeStamp,
-      'nonceStr': obj.nonceStr,
-      'package': obj.package,
-      'signType': obj.signType,
-      'paySign': obj.paySign,
-      'success':function(res){
-      },
-      'fail':function(res){
-      }
-    })
-  }  
+  startNotice: function() {
+    var me = this;
+    var notices = me.data.notices || [];
+    if( notices.length == 0 ) {
+      return;
+    }
+
+    var animation = me.animation;
+    //animation.translateY( -12 ).opacity( 0 ).step();
+    animation.translateY( 0 ).opacity( 1 ).step( { duration: 0 });
+    me.setData( { animationNotice: animation.export() });
+
+    var noticeIdx = me.data.noticeIdx + 1;
+    if( noticeIdx == notices.length ) {
+      noticeIdx = 0;
+    }
+
+    // 更换数据
+    setTimeout( function() {
+      me.setData( {
+        noticeIdx: noticeIdx
+      });
+    }, 400 );
+
+    // 启动下一次动画
+    setTimeout( function() {
+      me.startNotice();
+    }, 5000 );
+  },
+  onShow: function() {
+    this.startNotice();
+
+  },
+  onToTop: function( e ) {
+    if( e.detail.scrollTop >= 290 ) {
+      this.setData( { sortPanelPos: 'fixed' });
+    } else {
+      this.setData( { sortPanelPos: 'relative' });
+    }
+    console.log( e.detail.scrollTop )
+  }
 })
