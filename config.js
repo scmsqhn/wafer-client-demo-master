@@ -3,8 +3,10 @@
  */
 
 // 此处主机域名修改成腾讯云解决方案分配的域名
-var host = '70139330.qcloud.la';
+var host = '118.89.184.71:5755';
+//var host = '70139330.qcloud.la';
 
+//var host = '70139330.qcloud.la/data/release/node-weapp-demo';
 var config = {
 
     // 下面的地址配合云端 Demo 工作

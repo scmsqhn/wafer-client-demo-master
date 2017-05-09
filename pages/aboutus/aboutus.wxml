@@ -1,5 +1,4 @@
 <!--index.wxml-->
-<!--index.wxml-->
 <view class="container">
   <scroll-view class="scroll-container" upper-threshold="{{sortPanelDist}}" bindscroll="onToTop" scroll-y="true" style="height:calc(100% - 1px)">
     <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
@@ -10,5 +9,5 @@
         </block>
     </swiper>
   </scroll-view>
-  <button bindtap="payoff">我们是一只有情怀的创业队伍,您的每一份支持对我们都很重要,1人1次1块钱,让我们可以做的更好,点击付款</button>
+  <button bindtap="payoff">捐赠</button>
 </view>

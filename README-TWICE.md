@@ -117,3 +117,15 @@ AppSecret(小程序密钥)|9974370ad5523d55568059609a8ed9fa
 eval `ssh-agent -s`
 ssh-add ~/.ssh/ls
 	
+---
+# 17-05-09	
+netstat -a|grep 80
+
+将 qcloud_appid 1253682516
+修改为 qcloud_appid 70139330
+
+# 17-05-09 appsecret 密码!! important
+3d244230f537e0eb2e649f4cf0b2d14f
+
+cdb ip 地址
+10.66.231.15
