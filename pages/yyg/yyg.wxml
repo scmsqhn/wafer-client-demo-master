@@ -15,7 +15,7 @@
         </view>
         <view class="category-item">
             <image class="category-item-image" src="../../resources/images/ic_index_tab_ten.png" />
-            <text class="category-item-text">优选</text>
+            <text class="category-item-text">历史投注</text>
         </view>
         <view class="category-item">
             <image class="category-item-image" src="../../resources/images/ic_index_tab_share.png" />

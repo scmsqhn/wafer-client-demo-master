@@ -9,5 +9,5 @@
         </block>
     </swiper>
   </scroll-view>
-  <button bindtap="payoff">捐赠</button>
+  <button bindtap="payoff">点击支持</button>
 </view>

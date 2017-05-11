@@ -15,10 +15,10 @@
         </view>
     </view>
     <view class="line">
-        <text>报平安</text>
+        <text>SOS</text>
         <input type="text" value="{{requestUrl}}" disabled class="hide"></input>
         <view class="line-control">
-            <view bindtap="doRequest" class="item" ><view class="item-inner">向关心我的人们报平安</view></view>
+            <view bindtap="doRequest" class="item" ><view class="item-inner">开始呼叫</view></view>
         </view>
     </view>
     <view class="line">

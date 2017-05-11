@@ -156,9 +156,6 @@ function Tunnel(serviceUrl) {
                 if (+response.statusCode === 200 && response.data && response.data.url) {
                     openSocket(me.socketUrl = response.data.url);
                 } else {
-					console.log("============");
-					console.log(responese);
-					console.log("============");
                     dispatchConnectServiceError(response);
                 }
             },
